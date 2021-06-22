@@ -286,24 +286,6 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "amountIn",
-        type: "uint256",
-      },
-    ],
-    name: "forwardAsset",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "token",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
         name: "amount",
         type: "uint256",
       },
@@ -340,6 +322,24 @@ const _abi = [
       },
     ],
     name: "forwardETH",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "tokens",
+        type: "address[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "amountsIn",
+        type: "uint256[]",
+      },
+    ],
+    name: "forwardMultiAssets",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

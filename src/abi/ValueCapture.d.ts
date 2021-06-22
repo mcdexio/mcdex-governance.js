@@ -28,10 +28,10 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
     "authenticator()": FunctionFragment;
     "captureNotifyRecipient()": FunctionFragment;
     "externalExchanges(address)": FunctionFragment;
-    "forwardAsset(address,uint256)": FunctionFragment;
     "forwardERC20Token(address,uint256)": FunctionFragment;
     "forwardERC721Token(address,uint256)": FunctionFragment;
     "forwardETH(uint256)": FunctionFragment;
+    "forwardMultiAssets(address[],uint256[])": FunctionFragment;
     "getCapturedValue()": FunctionFragment;
     "initialize(address,address)": FunctionFragment;
     "lastCapturedBlock()": FunctionFragment;
@@ -70,10 +70,6 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(
-    functionFragment: "forwardAsset",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "forwardERC20Token",
     values: [string, BigNumberish]
   ): string;
@@ -84,6 +80,10 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "forwardETH",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "forwardMultiAssets",
+    values: [string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "getCapturedValue",
@@ -149,10 +149,6 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "forwardAsset",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "forwardERC20Token",
     data: BytesLike
   ): Result;
@@ -161,6 +157,10 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "forwardETH", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "forwardMultiAssets",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "getCapturedValue",
     data: BytesLike
@@ -311,18 +311,6 @@ export class ValueCapture extends Contract {
       0: string;
     }>;
 
-    forwardAsset(
-      token: string,
-      amountIn: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "forwardAsset(address,uint256)"(
-      token: string,
-      amountIn: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
     forwardERC20Token(
       token: string,
       amount: BigNumberish,
@@ -354,6 +342,18 @@ export class ValueCapture extends Contract {
 
     "forwardETH(uint256)"(
       amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    forwardMultiAssets(
+      tokens: string[],
+      amountsIn: BigNumberish[],
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "forwardMultiAssets(address[],uint256[])"(
+      tokens: string[],
+      amountsIn: BigNumberish[],
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -525,18 +525,6 @@ export class ValueCapture extends Contract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  forwardAsset(
-    token: string,
-    amountIn: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "forwardAsset(address,uint256)"(
-    token: string,
-    amountIn: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
   forwardERC20Token(
     token: string,
     amount: BigNumberish,
@@ -568,6 +556,18 @@ export class ValueCapture extends Contract {
 
   "forwardETH(uint256)"(
     amount: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  forwardMultiAssets(
+    tokens: string[],
+    amountsIn: BigNumberish[],
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "forwardMultiAssets(address[],uint256[])"(
+    tokens: string[],
+    amountsIn: BigNumberish[],
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -702,18 +702,6 @@ export class ValueCapture extends Contract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    forwardAsset(
-      token: string,
-      amountIn: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "forwardAsset(address,uint256)"(
-      token: string,
-      amountIn: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     forwardERC20Token(
       token: string,
       amount: BigNumberish,
@@ -742,6 +730,18 @@ export class ValueCapture extends Contract {
 
     "forwardETH(uint256)"(
       amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    forwardMultiAssets(
+      tokens: string[],
+      amountsIn: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "forwardMultiAssets(address[],uint256[])"(
+      tokens: string[],
+      amountsIn: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -907,18 +907,6 @@ export class ValueCapture extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    forwardAsset(
-      token: string,
-      amountIn: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "forwardAsset(address,uint256)"(
-      token: string,
-      amountIn: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
     forwardERC20Token(
       token: string,
       amount: BigNumberish,
@@ -947,6 +935,18 @@ export class ValueCapture extends Contract {
 
     "forwardETH(uint256)"(
       amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    forwardMultiAssets(
+      tokens: string[],
+      amountsIn: BigNumberish[],
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "forwardMultiAssets(address[],uint256[])"(
+      tokens: string[],
+      amountsIn: BigNumberish[],
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1080,18 +1080,6 @@ export class ValueCapture extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    forwardAsset(
-      token: string,
-      amountIn: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "forwardAsset(address,uint256)"(
-      token: string,
-      amountIn: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
     forwardERC20Token(
       token: string,
       amount: BigNumberish,
@@ -1123,6 +1111,18 @@ export class ValueCapture extends Contract {
 
     "forwardETH(uint256)"(
       amount: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    forwardMultiAssets(
+      tokens: string[],
+      amountsIn: BigNumberish[],
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "forwardMultiAssets(address[],uint256[])"(
+      tokens: string[],
+      amountsIn: BigNumberish[],
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
