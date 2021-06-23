@@ -1,5 +1,6 @@
 export * from './data'
 export * from './transact'
+export * from './constants'
 export type { Xmcb, XmcbInterface } from './abi/Xmcb'
 export { XmcbFactory } from './abi/XmcbFactory'
 export type { RewardDistribution, RewardDistributionInterface } from './abi/RewardDistribution'
