@@ -11,7 +11,7 @@ export const CHAIN_ID_TO_DAO_XMCB_ADDRESS: { [chainID: number]: string } = {
     // arb testnet
     421611: '0xee3f6Dc8168Fe907c24C50feCda14050147024F7',
     // arb one
-    42161: '0x630277E10Eb6D4b0e8d8C75FF9a434B28F13E0A9'
+    42161: '0x1284c70F0ed8539F450584Ce937267F8C088B4cC'
 }
 
 export const CHAIN_ID_TO_DAO_MINTER_ADDRESS: { [chainID: number]: string } = {
@@ -22,7 +22,7 @@ export const CHAIN_ID_TO_DAO_MINTER_ADDRESS: { [chainID: number]: string } = {
     // arb testnet
     421611: '0x2C14b56bA185709604265beedaca3E177699cb77',
     // arb one
-    42161: '0xda39c7e8903ba766BA93EF9b753D870A52cf9d2B'
+    42161: '0x7230D622D067D9C30154a750dBd29C035bA7605a'
 }
 
 export const CHAIN_ID_TO_DAO_MINING_ADDRESS: { [chainID: number]: string } = {
@@ -33,7 +33,7 @@ export const CHAIN_ID_TO_DAO_MINING_ADDRESS: { [chainID: number]: string } = {
     // arb testnet
     421611: '0xB3869A26159066A8AD9789882b22f7A6EA6cA76a',
     // arb one
-    42161: '0x9C9F5B4339a4bc4C91ECb1E7327f7434Af5C6d47'
+    42161: '0x694baa24d46530E46BCd39b1F07943a2BDDb01e6'
 }
 
 export const CHAIN_ID_TO_DAO_VALUE_CAPTURE_ADDRESS: { [chainID: number]: string } = {
@@ -44,7 +44,7 @@ export const CHAIN_ID_TO_DAO_VALUE_CAPTURE_ADDRESS: { [chainID: number]: string 
     // arb testnet
     421611: '0xB25a6a1De2C17bfeEb721eaeeC470fbA9E0E0aFB',
     // arb one
-    42161: '0x5b0648eA11f7ea2600587E627da11A750AA56c08'
+    42161: '0xa04197E5F7971E7AEf78Cf5Ad2bC65aaC1a967Aa'
 }
 
 
@@ -56,7 +56,7 @@ export const CHAIN_ID_TO_DAO_VAULT_ADDRESS: { [chainID: number]: string } = {
     // arb testnet
     421611: '0xcC52CE02158Bf55779E8434B82b5940d05994d3C',
     // arb one
-    42161: '0x254927Fc7065Cc5c54eE5c3A03aa23B73762B449'
+    42161: '0xD78ba1D99dbBC4ebA3B206c9C67a08879b6eC79B'
 }
 
 export const CHAIN_ID_TO_DAO_GOVERNOR_ADDRESS: { [chainID: number]: string } = {
@@ -67,7 +67,7 @@ export const CHAIN_ID_TO_DAO_GOVERNOR_ADDRESS: { [chainID: number]: string } = {
     // arb testnet
     421611: '0xaf977F17EB9Fc0e1f42266b899f725E102503770',
     // arb one
-    42161: '0x2868aBDD9f843a8B968c3D9D373C5A8b2a833b92'
+    42161: '0x8597eB9E005f39f8f70A17aeA914B20450ABfE60'
 }
 
 export const CHAIN_ID_TO_DAO_TIMELOCK_ADDRESS: { [chainID: number]: string } = {
@@ -78,5 +78,5 @@ export const CHAIN_ID_TO_DAO_TIMELOCK_ADDRESS: { [chainID: number]: string } = {
     // arb testnet
     421611: '0x6Ab6A2bcE38287B4C068d5CC3f65F19FE5a2c519',
     // arb one
-    42161: '0x70cD985F196f8010A5a39075874b9D99A8C7601e'
+    42161: '0xC1D816Ad4Ee531994D940C6C3ECEdb948Dc2735e'
 }
