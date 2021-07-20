@@ -1,1 +1,1 @@
-# mcdex3-governance.js
+# MCDEX DAO Javascript API
