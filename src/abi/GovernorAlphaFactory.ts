@@ -239,6 +239,19 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "newGuardian",
+        type: "address",
+      },
+    ],
+    name: "__transferGuardian",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "proposalId",
         type: "uint256",
@@ -484,7 +497,7 @@ const _abi = [
     name: "mcbToken",
     outputs: [
       {
-        internalType: "contract IERC20Upgradeable",
+        internalType: "contract IMCB",
         name: "",
         type: "address",
       },

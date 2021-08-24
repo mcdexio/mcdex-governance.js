@@ -29,6 +29,7 @@ interface GovernorAlphaInterface extends ethers.utils.Interface {
     "__acceptAdmin()": FunctionFragment;
     "__executeSetTimelockPendingAdmin(address,uint256)": FunctionFragment;
     "__queueSetTimelockPendingAdmin(address,uint256)": FunctionFragment;
+    "__transferGuardian(address)": FunctionFragment;
     "cancel(uint256)": FunctionFragment;
     "castVote(uint256,bool)": FunctionFragment;
     "castVoteBySig(uint256,bool,uint8,bytes32,bytes32)": FunctionFragment;
@@ -78,6 +79,10 @@ interface GovernorAlphaInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "__queueSetTimelockPendingAdmin",
     values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "__transferGuardian",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "cancel",
@@ -176,6 +181,10 @@ interface GovernorAlphaInterface extends ethers.utils.Interface {
     functionFragment: "__queueSetTimelockPendingAdmin",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "__transferGuardian",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "cancel", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "castVote", data: BytesLike): Result;
   decodeFunctionResult(
@@ -257,27 +266,19 @@ export class GovernorAlpha extends Contract {
   interface: GovernorAlphaInterface;
 
   functions: {
-    BALLOT_TYPEHASH(
-      overrides?: CallOverrides
-    ): Promise<{
+    BALLOT_TYPEHASH(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "BALLOT_TYPEHASH()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "BALLOT_TYPEHASH()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    DOMAIN_TYPEHASH(
-      overrides?: CallOverrides
-    ): Promise<{
+    DOMAIN_TYPEHASH(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "DOMAIN_TYPEHASH()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "DOMAIN_TYPEHASH()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -310,6 +311,16 @@ export class GovernorAlpha extends Contract {
     "__queueSetTimelockPendingAdmin(address,uint256)"(
       newPendingAdmin: string,
       eta: BigNumberish,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    __transferGuardian(
+      newGuardian: string,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "__transferGuardian(address)"(
+      newGuardian: string,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -353,15 +364,11 @@ export class GovernorAlpha extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    comp(
-      overrides?: CallOverrides
-    ): Promise<{
+    comp(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "comp()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "comp()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -433,27 +440,19 @@ export class GovernorAlpha extends Contract {
       };
     }>;
 
-    guardian(
-      overrides?: CallOverrides
-    ): Promise<{
+    guardian(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "guardian()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "guardian()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    initialProposalId(
-      overrides?: CallOverrides
-    ): Promise<{
+    initialProposalId(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "initialProposalId()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "initialProposalId()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -489,63 +488,43 @@ export class GovernorAlpha extends Contract {
       0: BigNumber;
     }>;
 
-    mcbToken(
-      overrides?: CallOverrides
-    ): Promise<{
+    mcbToken(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "mcbToken()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "mcbToken()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    name(
-      overrides?: CallOverrides
-    ): Promise<{
+    name(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "name()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "name()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    proposalCount(
-      overrides?: CallOverrides
-    ): Promise<{
+    proposalCount(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "proposalCount()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "proposalCount()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    proposalMaxOperations(
-      overrides?: CallOverrides
-    ): Promise<{
+    proposalMaxOperations(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "proposalMaxOperations()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "proposalMaxOperations()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    proposalThreshold(
-      overrides?: CallOverrides
-    ): Promise<{
+    proposalThreshold(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "proposalThreshold()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "proposalThreshold()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -629,15 +608,11 @@ export class GovernorAlpha extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    quorumVotes(
-      overrides?: CallOverrides
-    ): Promise<{
+    quorumVotes(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "quorumVotes()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "quorumVotes()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -655,39 +630,27 @@ export class GovernorAlpha extends Contract {
       0: number;
     }>;
 
-    timelock(
-      overrides?: CallOverrides
-    ): Promise<{
+    timelock(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "timelock()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "timelock()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    votingDelay(
-      overrides?: CallOverrides
-    ): Promise<{
+    votingDelay(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "votingDelay()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "votingDelay()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    votingPeriod(
-      overrides?: CallOverrides
-    ): Promise<{
+    votingPeriod(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "votingPeriod()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "votingPeriod()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
   };
@@ -729,6 +692,16 @@ export class GovernorAlpha extends Contract {
   "__queueSetTimelockPendingAdmin(address,uint256)"(
     newPendingAdmin: string,
     eta: BigNumberish,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  __transferGuardian(
+    newGuardian: string,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "__transferGuardian(address)"(
+    newGuardian: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -1037,6 +1010,16 @@ export class GovernorAlpha extends Contract {
     "__queueSetTimelockPendingAdmin(address,uint256)"(
       newPendingAdmin: string,
       eta: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    __transferGuardian(
+      newGuardian: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "__transferGuardian(address)"(
+      newGuardian: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1368,6 +1351,16 @@ export class GovernorAlpha extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    __transferGuardian(
+      newGuardian: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "__transferGuardian(address)"(
+      newGuardian: string,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
     cancel(proposalId: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
 
     "cancel(uint256)"(
@@ -1601,6 +1594,16 @@ export class GovernorAlpha extends Contract {
     "__queueSetTimelockPendingAdmin(address,uint256)"(
       newPendingAdmin: string,
       eta: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    __transferGuardian(
+      newGuardian: string,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "__transferGuardian(address)"(
+      newGuardian: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 

@@ -38,10 +38,10 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
     "listUSDTokens(uint256,uint256)": FunctionFragment;
     "normalizers(address)": FunctionFragment;
     "removeUSDToken(address)": FunctionFragment;
+    "sendCaptureNotification()": FunctionFragment;
     "setCaptureNotifyRecipient(address)": FunctionFragment;
     "setExternalExchange(address,address)": FunctionFragment;
     "totalCapturedUSD()": FunctionFragment;
-    "tryNotifyCapturedValue()": FunctionFragment;
     "vault()": FunctionFragment;
   };
 
@@ -107,6 +107,10 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(
+    functionFragment: "sendCaptureNotification",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "setCaptureNotifyRecipient",
     values: [string]
   ): string;
@@ -116,10 +120,6 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "totalCapturedUSD",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tryNotifyCapturedValue",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "vault", values?: undefined): string;
@@ -183,6 +183,10 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "sendCaptureNotification",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setCaptureNotifyRecipient",
     data: BytesLike
   ): Result;
@@ -192,10 +196,6 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "totalCapturedUSD",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tryNotifyCapturedValue",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "vault", data: BytesLike): Result;
@@ -208,6 +208,7 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
     "ForwardERC721Token(address,uint256)": EventFragment;
     "ForwardETH(uint256)": EventFragment;
     "RemoveUSDToken(address)": EventFragment;
+    "SendValueCaptureNotification(address,uint256,uint256)": EventFragment;
     "SetConvertor(address,address)": EventFragment;
     "SetMiner(address,address)": EventFragment;
   };
@@ -219,6 +220,9 @@ interface ValueCaptureInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ForwardERC721Token"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ForwardETH"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RemoveUSDToken"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "SendValueCaptureNotification"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetConvertor"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetMiner"): EventFragment;
 }
@@ -237,27 +241,19 @@ export class ValueCapture extends Contract {
   interface: ValueCaptureInterface;
 
   functions: {
-    SYSTEM_DECIMALS(
-      overrides?: CallOverrides
-    ): Promise<{
+    SYSTEM_DECIMALS(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "SYSTEM_DECIMALS()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "SYSTEM_DECIMALS()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    VALUE_CAPTURE_ADMIN_ROLE(
-      overrides?: CallOverrides
-    ): Promise<{
+    VALUE_CAPTURE_ADMIN_ROLE(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "VALUE_CAPTURE_ADMIN_ROLE()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "VALUE_CAPTURE_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -273,27 +269,19 @@ export class ValueCapture extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    authenticator(
-      overrides?: CallOverrides
-    ): Promise<{
+    authenticator(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "authenticator()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "authenticator()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    captureNotifyRecipient(
-      overrides?: CallOverrides
-    ): Promise<{
+    captureNotifyRecipient(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "captureNotifyRecipient()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "captureNotifyRecipient()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -357,16 +345,12 @@ export class ValueCapture extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    getCapturedValue(
-      overrides?: CallOverrides
-    ): Promise<{
+    getCapturedValue(overrides?: CallOverrides): Promise<{
       0: BigNumber;
       1: BigNumber;
     }>;
 
-    "getCapturedValue()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "getCapturedValue()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
       1: BigNumber;
     }>;
@@ -383,15 +367,11 @@ export class ValueCapture extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    lastCapturedBlock(
-      overrides?: CallOverrides
-    ): Promise<{
+    lastCapturedBlock(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "lastCapturedBlock()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "lastCapturedBlock()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -437,6 +417,14 @@ export class ValueCapture extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    sendCaptureNotification(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "sendCaptureNotification()"(
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
     setCaptureNotifyRecipient(
       newRecipient: string,
       overrides?: Overrides
@@ -459,33 +447,19 @@ export class ValueCapture extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    totalCapturedUSD(
-      overrides?: CallOverrides
-    ): Promise<{
+    totalCapturedUSD(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "totalCapturedUSD()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "totalCapturedUSD()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    tryNotifyCapturedValue(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "tryNotifyCapturedValue()"(
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    vault(
-      overrides?: CallOverrides
-    ): Promise<{
+    vault(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "vault()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "vault()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
   };
@@ -571,16 +545,12 @@ export class ValueCapture extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  getCapturedValue(
-    overrides?: CallOverrides
-  ): Promise<{
+  getCapturedValue(overrides?: CallOverrides): Promise<{
     0: BigNumber;
     1: BigNumber;
   }>;
 
-  "getCapturedValue()"(
-    overrides?: CallOverrides
-  ): Promise<{
+  "getCapturedValue()"(overrides?: CallOverrides): Promise<{
     0: BigNumber;
     1: BigNumber;
   }>;
@@ -630,6 +600,12 @@ export class ValueCapture extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  sendCaptureNotification(overrides?: Overrides): Promise<ContractTransaction>;
+
+  "sendCaptureNotification()"(
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   setCaptureNotifyRecipient(
     newRecipient: string,
     overrides?: Overrides
@@ -655,12 +631,6 @@ export class ValueCapture extends Contract {
   totalCapturedUSD(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalCapturedUSD()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-  tryNotifyCapturedValue(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "tryNotifyCapturedValue()"(
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
 
   vault(overrides?: CallOverrides): Promise<string>;
 
@@ -745,16 +715,12 @@ export class ValueCapture extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getCapturedValue(
-      overrides?: CallOverrides
-    ): Promise<{
+    getCapturedValue(overrides?: CallOverrides): Promise<{
       0: BigNumber;
       1: BigNumber;
     }>;
 
-    "getCapturedValue()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "getCapturedValue()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
       1: BigNumber;
     }>;
@@ -801,6 +767,10 @@ export class ValueCapture extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    sendCaptureNotification(overrides?: CallOverrides): Promise<void>;
+
+    "sendCaptureNotification()"(overrides?: CallOverrides): Promise<void>;
+
     setCaptureNotifyRecipient(
       newRecipient: string,
       overrides?: CallOverrides
@@ -826,10 +796,6 @@ export class ValueCapture extends Contract {
     totalCapturedUSD(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalCapturedUSD()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tryNotifyCapturedValue(overrides?: CallOverrides): Promise<void>;
-
-    "tryNotifyCapturedValue()"(overrides?: CallOverrides): Promise<void>;
 
     vault(overrides?: CallOverrides): Promise<string>;
 
@@ -859,6 +825,12 @@ export class ValueCapture extends Contract {
     ForwardETH(amount: null): EventFilter;
 
     RemoveUSDToken(usdToken: string | null): EventFilter;
+
+    SendValueCaptureNotification(
+      recipient: string | null,
+      totalCapturedUSD: null,
+      lastCapturedBlock: null
+    ): EventFilter;
 
     SetConvertor(
       tokenAddress: string | null,
@@ -996,6 +968,10 @@ export class ValueCapture extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    sendCaptureNotification(overrides?: Overrides): Promise<BigNumber>;
+
+    "sendCaptureNotification()"(overrides?: Overrides): Promise<BigNumber>;
+
     setCaptureNotifyRecipient(
       newRecipient: string,
       overrides?: Overrides
@@ -1021,10 +997,6 @@ export class ValueCapture extends Contract {
     totalCapturedUSD(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalCapturedUSD()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tryNotifyCapturedValue(overrides?: Overrides): Promise<BigNumber>;
-
-    "tryNotifyCapturedValue()"(overrides?: Overrides): Promise<BigNumber>;
 
     vault(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1182,6 +1154,14 @@ export class ValueCapture extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    sendCaptureNotification(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "sendCaptureNotification()"(
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
     setCaptureNotifyRecipient(
       newRecipient: string,
       overrides?: Overrides
@@ -1208,14 +1188,6 @@ export class ValueCapture extends Contract {
 
     "totalCapturedUSD()"(
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    tryNotifyCapturedValue(
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "tryNotifyCapturedValue()"(
-      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     vault(overrides?: CallOverrides): Promise<PopulatedTransaction>;

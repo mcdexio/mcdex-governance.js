@@ -166,39 +166,27 @@ export class Timelock extends Contract {
   interface: TimelockInterface;
 
   functions: {
-    GRACE_PERIOD(
-      overrides?: CallOverrides
-    ): Promise<{
+    GRACE_PERIOD(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "GRACE_PERIOD()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "GRACE_PERIOD()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    MAXIMUM_DELAY(
-      overrides?: CallOverrides
-    ): Promise<{
+    MAXIMUM_DELAY(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "MAXIMUM_DELAY()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "MAXIMUM_DELAY()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    MINIMUM_DELAY(
-      overrides?: CallOverrides
-    ): Promise<{
+    MINIMUM_DELAY(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "MINIMUM_DELAY()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "MINIMUM_DELAY()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -206,15 +194,11 @@ export class Timelock extends Contract {
 
     "acceptAdmin()"(overrides?: Overrides): Promise<ContractTransaction>;
 
-    admin(
-      overrides?: CallOverrides
-    ): Promise<{
+    admin(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "admin()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "admin()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -236,15 +220,11 @@ export class Timelock extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    delay(
-      overrides?: CallOverrides
-    ): Promise<{
+    delay(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "delay()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "delay()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -278,15 +258,11 @@ export class Timelock extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    pendingAdmin(
-      overrides?: CallOverrides
-    ): Promise<{
+    pendingAdmin(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "pendingAdmin()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "pendingAdmin()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 

@@ -1,6 +1,6 @@
 {
   "name": "@mcdex/mcdex-governance.js",
-  "version": "0.5.56",
+  "version": "0.5.57",
   "description": "MCDEX governance protocol JavaScript API",
   "homepage": "http://github.com/mcdexio/mcdex-governance.js",
   "author": "Zhu Tianchi <zhutianchi@mcarlo.com>",

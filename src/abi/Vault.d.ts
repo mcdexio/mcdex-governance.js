@@ -107,15 +107,11 @@ export class Vault extends Contract {
   interface: VaultInterface;
 
   functions: {
-    authenticator(
-      overrides?: CallOverrides
-    ): Promise<{
+    authenticator(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "authenticator()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "authenticator()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 

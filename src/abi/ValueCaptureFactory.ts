@@ -156,6 +156,31 @@ const _abi = [
       {
         indexed: true,
         internalType: "address",
+        name: "recipient",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "totalCapturedUSD",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lastCapturedBlock",
+        type: "uint256",
+      },
+    ],
+    name: "SendValueCaptureNotification",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
         name: "tokenAddress",
         type: "address",
       },
@@ -450,6 +475,13 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "sendCaptureNotification",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "address",
@@ -491,13 +523,6 @@ const _abi = [
       },
     ],
     stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "tryNotifyCapturedValue",
-    outputs: [],
-    stateMutability: "nonpayable",
     type: "function",
   },
   {

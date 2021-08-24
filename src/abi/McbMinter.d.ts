@@ -37,7 +37,7 @@ interface McbMinterInterface extends ethers.utils.Interface {
     "lastCapturedValue()": FunctionFragment;
     "mcbToken()": FunctionFragment;
     "mintFromBase(address,uint256)": FunctionFragment;
-    "mintFromRound(uint256,uint256)": FunctionFragment;
+    "mintFromRound(uint256)": FunctionFragment;
     "newRound(address,uint128,uint128,uint128)": FunctionFragment;
     "onValueCaptured(uint256,uint256)": FunctionFragment;
     "roundMintStates(uint256)": FunctionFragment;
@@ -101,7 +101,7 @@ interface McbMinterInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "mintFromRound",
-    values: [BigNumberish, BigNumberish]
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "newRound",
@@ -208,7 +208,7 @@ interface McbMinterInterface extends ethers.utils.Interface {
     "SetDeveloper(address,address)": EventFragment;
     "UpdateBaseMintableAmount(uint256,uint256,uint256)": EventFragment;
     "UpdateExtraMintableAmount(uint256,uint256,uint256,uint256)": EventFragment;
-    "UpdateSeriesAMintableAmount(uint256,uint256,uint256,uint256)": EventFragment;
+    "UpdateRoundMintableAmount(uint256,uint256,uint256,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "BaseMint"): EventFragment;
@@ -221,9 +221,7 @@ interface McbMinterInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "SetDeveloper"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UpdateBaseMintableAmount"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UpdateExtraMintableAmount"): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "UpdateSeriesAMintableAmount"
-  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "UpdateRoundMintableAmount"): EventFragment;
 }
 
 export class McbMinter extends Contract {
@@ -240,69 +238,47 @@ export class McbMinter extends Contract {
   interface: McbMinterInterface;
 
   functions: {
-    DEVELOPER_COMMISSION_RATE(
-      overrides?: CallOverrides
-    ): Promise<{
+    DEVELOPER_COMMISSION_RATE(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "DEVELOPER_COMMISSION_RATE()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "DEVELOPER_COMMISSION_RATE()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    MCB_MAX_SUPPLY(
-      overrides?: CallOverrides
-    ): Promise<{
+    MCB_MAX_SUPPLY(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "MCB_MAX_SUPPLY()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "MCB_MAX_SUPPLY()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    MINTER_ADMIN_ROLE(
-      overrides?: CallOverrides
-    ): Promise<{
+    MINTER_ADMIN_ROLE(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "MINTER_ADMIN_ROLE()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "MINTER_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    VALUE_CAPTURE_ROLE(
-      overrides?: CallOverrides
-    ): Promise<{
+    VALUE_CAPTURE_ROLE(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "VALUE_CAPTURE_ROLE()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "VALUE_CAPTURE_ROLE()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    authenticator(
-      overrides?: CallOverrides
-    ): Promise<{
+    authenticator(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "authenticator()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "authenticator()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    baseMintState(
-      overrides?: CallOverrides
-    ): Promise<{
+    baseMintState(overrides?: CallOverrides): Promise<{
       recipient: string;
       maxSupply: BigNumber;
       rateLimitPerBlock: BigNumber;
@@ -317,9 +293,7 @@ export class McbMinter extends Contract {
       5: BigNumber;
     }>;
 
-    "baseMintState()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "baseMintState()"(overrides?: CallOverrides): Promise<{
       recipient: string;
       maxSupply: BigNumber;
       rateLimitPerBlock: BigNumber;
@@ -334,39 +308,27 @@ export class McbMinter extends Contract {
       5: BigNumber;
     }>;
 
-    developer(
-      overrides?: CallOverrides
-    ): Promise<{
+    developer(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "developer()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "developer()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    extraMintableAmount(
-      overrides?: CallOverrides
-    ): Promise<{
+    extraMintableAmount(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "extraMintableAmount()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "extraMintableAmount()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    genesisBlock(
-      overrides?: CallOverrides
-    ): Promise<{
+    genesisBlock(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "genesisBlock()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "genesisBlock()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -394,39 +356,27 @@ export class McbMinter extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    lastCapturedBlock(
-      overrides?: CallOverrides
-    ): Promise<{
+    lastCapturedBlock(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "lastCapturedBlock()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "lastCapturedBlock()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    lastCapturedValue(
-      overrides?: CallOverrides
-    ): Promise<{
+    lastCapturedValue(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "lastCapturedValue()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "lastCapturedValue()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    mcbToken(
-      overrides?: CallOverrides
-    ): Promise<{
+    mcbToken(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "mcbToken()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "mcbToken()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -444,13 +394,11 @@ export class McbMinter extends Contract {
 
     mintFromRound(
       index: BigNumberish,
-      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "mintFromRound(uint256,uint256)"(
+    "mintFromRound(uint256)"(
       index: BigNumberish,
-      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -555,9 +503,7 @@ export class McbMinter extends Contract {
 
   "authenticator()"(overrides?: CallOverrides): Promise<string>;
 
-  baseMintState(
-    overrides?: CallOverrides
-  ): Promise<{
+  baseMintState(overrides?: CallOverrides): Promise<{
     recipient: string;
     maxSupply: BigNumber;
     rateLimitPerBlock: BigNumber;
@@ -572,9 +518,7 @@ export class McbMinter extends Contract {
     5: BigNumber;
   }>;
 
-  "baseMintState()"(
-    overrides?: CallOverrides
-  ): Promise<{
+  "baseMintState()"(overrides?: CallOverrides): Promise<{
     recipient: string;
     maxSupply: BigNumber;
     rateLimitPerBlock: BigNumber;
@@ -651,13 +595,11 @@ export class McbMinter extends Contract {
 
   mintFromRound(
     index: BigNumberish,
-    amount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "mintFromRound(uint256,uint256)"(
+  "mintFromRound(uint256)"(
     index: BigNumberish,
-    amount: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -762,9 +704,7 @@ export class McbMinter extends Contract {
 
     "authenticator()"(overrides?: CallOverrides): Promise<string>;
 
-    baseMintState(
-      overrides?: CallOverrides
-    ): Promise<{
+    baseMintState(overrides?: CallOverrides): Promise<{
       recipient: string;
       maxSupply: BigNumber;
       rateLimitPerBlock: BigNumber;
@@ -779,9 +719,7 @@ export class McbMinter extends Contract {
       5: BigNumber;
     }>;
 
-    "baseMintState()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "baseMintState()"(overrides?: CallOverrides): Promise<{
       recipient: string;
       maxSupply: BigNumber;
       rateLimitPerBlock: BigNumber;
@@ -808,18 +746,14 @@ export class McbMinter extends Contract {
 
     "genesisBlock()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getMintableAmounts(
-      overrides?: CallOverrides
-    ): Promise<{
+    getMintableAmounts(overrides?: CallOverrides): Promise<{
       baseMintableAmount: BigNumber;
       roundMintableAmounts: BigNumber[];
       0: BigNumber;
       1: BigNumber[];
     }>;
 
-    "getMintableAmounts()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "getMintableAmounts()"(overrides?: CallOverrides): Promise<{
       baseMintableAmount: BigNumber;
       roundMintableAmounts: BigNumber[];
       0: BigNumber;
@@ -872,13 +806,11 @@ export class McbMinter extends Contract {
 
     mintFromRound(
       index: BigNumberish,
-      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "mintFromRound(uint256,uint256)"(
+    "mintFromRound(uint256)"(
       index: BigNumberish,
-      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1007,7 +939,7 @@ export class McbMinter extends Contract {
       extraMintableAmount: null
     ): EventFilter;
 
-    UpdateSeriesAMintableAmount(
+    UpdateRoundMintableAmount(
       lastUpdateBlock: null,
       currentBlock: null,
       seriesAMintableAmount: null,
@@ -1104,13 +1036,11 @@ export class McbMinter extends Contract {
 
     mintFromRound(
       index: BigNumberish,
-      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "mintFromRound(uint256,uint256)"(
+    "mintFromRound(uint256)"(
       index: BigNumberish,
-      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1276,13 +1206,11 @@ export class McbMinter extends Contract {
 
     mintFromRound(
       index: BigNumberish,
-      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "mintFromRound(uint256,uint256)"(
+    "mintFromRound(uint256)"(
       index: BigNumberish,
-      amount: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 

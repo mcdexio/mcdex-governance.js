@@ -37,11 +37,8 @@ interface RewardDistributionInterface extends ethers.utils.Interface {
     "initialize(address,address)": FunctionFragment;
     "lastTimeRewardApplicable(address)": FunctionFragment;
     "notifyRewardAmount(address,uint256)": FunctionFragment;
-    "owner()": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
     "rewardPerToken(address)": FunctionFragment;
     "setRewardRate(address,uint256)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
     "xmcb()": FunctionFragment;
   };
 
@@ -96,11 +93,6 @@ interface RewardDistributionInterface extends ethers.utils.Interface {
     functionFragment: "notifyRewardAmount",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
-  ): string;
   encodeFunctionData(
     functionFragment: "rewardPerToken",
     values: [string]
@@ -108,10 +100,6 @@ interface RewardDistributionInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "setRewardRate",
     values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [string]
   ): string;
   encodeFunctionData(functionFragment: "xmcb", values?: undefined): string;
 
@@ -160,11 +148,6 @@ interface RewardDistributionInterface extends ethers.utils.Interface {
     functionFragment: "notifyRewardAmount",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "rewardPerToken",
     data: BytesLike
@@ -173,21 +156,15 @@ interface RewardDistributionInterface extends ethers.utils.Interface {
     functionFragment: "setRewardRate",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "xmcb", data: BytesLike): Result;
 
   events: {
-    "OwnershipTransferred(address,address)": EventFragment;
     "RewardAdded(uint256,uint256)": EventFragment;
     "RewardPaid(address,uint256)": EventFragment;
     "RewardPlanCreated(address,uint256)": EventFragment;
     "RewardRateChanged(uint256,uint256,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RewardAdded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RewardPaid"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RewardPlanCreated"): EventFragment;
@@ -208,39 +185,27 @@ export class RewardDistribution extends Contract {
   interface: RewardDistributionInterface;
 
   functions: {
-    REWARD_DISTRIBUTION_ADMIN_ROLE(
-      overrides?: CallOverrides
-    ): Promise<{
+    REWARD_DISTRIBUTION_ADMIN_ROLE(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "REWARD_DISTRIBUTION_ADMIN_ROLE()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "REWARD_DISTRIBUTION_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    authenticator(
-      overrides?: CallOverrides
-    ): Promise<{
+    authenticator(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "authenticator()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "authenticator()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    baseToken(
-      overrides?: CallOverrides
-    ): Promise<{
+    baseToken(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "baseToken()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "baseToken()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -330,15 +295,11 @@ export class RewardDistribution extends Contract {
       1: BigNumber;
     }>;
 
-    getRewardTokens(
-      overrides?: CallOverrides
-    ): Promise<{
+    getRewardTokens(overrides?: CallOverrides): Promise<{
       0: string[];
     }>;
 
-    "getRewardTokens()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "getRewardTokens()"(overrides?: CallOverrides): Promise<{
       0: string[];
     }>;
 
@@ -394,22 +355,6 @@ export class RewardDistribution extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    owner(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: string;
-    }>;
-
-    "owner()"(
-      overrides?: CallOverrides
-    ): Promise<{
-      0: string;
-    }>;
-
-    renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
-
     rewardPerToken(
       token: string,
       overrides?: CallOverrides
@@ -436,25 +381,11 @@ export class RewardDistribution extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "transferOwnership(address)"(
-      newOwner: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    xmcb(
-      overrides?: CallOverrides
-    ): Promise<{
+    xmcb(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "xmcb()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "xmcb()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
   };
@@ -597,14 +528,6 @@ export class RewardDistribution extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  owner(overrides?: CallOverrides): Promise<string>;
-
-  "owner()"(overrides?: CallOverrides): Promise<string>;
-
-  renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
-
   rewardPerToken(token: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   "rewardPerToken(address)"(
@@ -621,16 +544,6 @@ export class RewardDistribution extends Contract {
   "setRewardRate(address,uint256)"(
     token: string,
     newRewardRate: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  transferOwnership(
-    newOwner: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "transferOwnership(address)"(
-    newOwner: string,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -777,14 +690,6 @@ export class RewardDistribution extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    owner(overrides?: CallOverrides): Promise<string>;
-
-    "owner()"(overrides?: CallOverrides): Promise<string>;
-
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
-
     rewardPerToken(
       token: string,
       overrides?: CallOverrides
@@ -807,27 +712,12 @@ export class RewardDistribution extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    transferOwnership(
-      newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "transferOwnership(address)"(
-      newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     xmcb(overrides?: CallOverrides): Promise<string>;
 
     "xmcb()"(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
-    OwnershipTransferred(
-      previousOwner: string | null,
-      newOwner: string | null
-    ): EventFilter;
-
     RewardAdded(reward: null, periodFinish: null): EventFilter;
 
     RewardPaid(user: string | null, reward: null): EventFilter;
@@ -973,14 +863,6 @@ export class RewardDistribution extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
-
-    "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
-
     rewardPerToken(
       token: string,
       overrides?: CallOverrides
@@ -1000,16 +882,6 @@ export class RewardDistribution extends Contract {
     "setRewardRate(address,uint256)"(
       token: string,
       newRewardRate: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "transferOwnership(address)"(
-      newOwner: string,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1161,14 +1033,6 @@ export class RewardDistribution extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
-
     rewardPerToken(
       token: string,
       overrides?: CallOverrides
@@ -1188,16 +1052,6 @@ export class RewardDistribution extends Contract {
     "setRewardRate(address,uint256)"(
       token: string,
       newRewardRate: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "transferOwnership(address)"(
-      newOwner: string,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 

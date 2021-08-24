@@ -277,7 +277,7 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "UpdateSeriesAMintableAmount",
+    name: "UpdateRoundMintableAmount",
     type: "event",
   },
   {
@@ -540,11 +540,6 @@ const _abi = [
       {
         internalType: "uint256",
         name: "index",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
         type: "uint256",
       },
     ],

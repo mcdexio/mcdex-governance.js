@@ -281,7 +281,7 @@ interface XmcbInterface extends ethers.utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "DelegateChanged(address,address,address)": EventFragment;
     "DelegateVotesChanged(address,uint256,uint256)": EventFragment;
-    "Depoist(address,uint256)": EventFragment;
+    "Deposit(address,uint256)": EventFragment;
     "RemoveListener(address)": EventFragment;
     "SetWithdrawalPenaltyRate(uint256,uint256)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
@@ -292,7 +292,7 @@ interface XmcbInterface extends ethers.utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DelegateChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DelegateVotesChanged"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Depoist"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Deposit"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RemoveListener"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "SetWithdrawalPenaltyRate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
@@ -313,39 +313,27 @@ export class Xmcb extends Contract {
   interface: XmcbInterface;
 
   functions: {
-    DELEGATION_TYPEHASH(
-      overrides?: CallOverrides
-    ): Promise<{
+    DELEGATION_TYPEHASH(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "DELEGATION_TYPEHASH()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "DELEGATION_TYPEHASH()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    DOMAIN_TYPEHASH(
-      overrides?: CallOverrides
-    ): Promise<{
+    DOMAIN_TYPEHASH(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "DOMAIN_TYPEHASH()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "DOMAIN_TYPEHASH()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    XMCB_ADMIN_ROLE(
-      overrides?: CallOverrides
-    ): Promise<{
+    XMCB_ADMIN_ROLE(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "XMCB_ADMIN_ROLE()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "XMCB_ADMIN_ROLE()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -391,15 +379,11 @@ export class Xmcb extends Contract {
       0: boolean;
     }>;
 
-    authenticator(
-      overrides?: CallOverrides
-    ): Promise<{
+    authenticator(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "authenticator()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "authenticator()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -439,27 +423,19 @@ export class Xmcb extends Contract {
       1: BigNumber;
     }>;
 
-    componentCount(
-      overrides?: CallOverrides
-    ): Promise<{
+    componentCount(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "componentCount()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "componentCount()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    decimals(
-      overrides?: CallOverrides
-    ): Promise<{
+    decimals(overrides?: CallOverrides): Promise<{
       0: number;
     }>;
 
-    "decimals()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "decimals()"(overrides?: CallOverrides): Promise<{
       0: number;
     }>;
 
@@ -607,15 +583,11 @@ export class Xmcb extends Contract {
       0: string[];
     }>;
 
-    name(
-      overrides?: CallOverrides
-    ): Promise<{
+    name(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "name()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "name()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
@@ -661,27 +633,19 @@ export class Xmcb extends Contract {
       0: BigNumber;
     }>;
 
-    rawToken(
-      overrides?: CallOverrides
-    ): Promise<{
+    rawToken(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "rawToken()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "rawToken()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    rawTotalSupply(
-      overrides?: CallOverrides
-    ): Promise<{
+    rawTotalSupply(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "rawTotalSupply()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "rawTotalSupply()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -705,27 +669,19 @@ export class Xmcb extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    symbol(
-      overrides?: CallOverrides
-    ): Promise<{
+    symbol(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    "symbol()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "symbol()"(overrides?: CallOverrides): Promise<{
       0: string;
     }>;
 
-    totalSupply(
-      overrides?: CallOverrides
-    ): Promise<{
+    totalSupply(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "totalSupply()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "totalSupply()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
@@ -773,15 +729,11 @@ export class Xmcb extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    withdrawalPenaltyRate(
-      overrides?: CallOverrides
-    ): Promise<{
+    withdrawalPenaltyRate(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
 
-    "withdrawalPenaltyRate()"(
-      overrides?: CallOverrides
-    ): Promise<{
+    "withdrawalPenaltyRate()"(overrides?: CallOverrides): Promise<{
       0: BigNumber;
     }>;
   };
@@ -1394,7 +1346,7 @@ export class Xmcb extends Contract {
       newBalance: null
     ): EventFilter;
 
-    Depoist(account: string | null, amount: null): EventFilter;
+    Deposit(account: string | null, amount: null): EventFilter;
 
     RemoveListener(component: string | null): EventFilter;
 
